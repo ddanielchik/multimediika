@@ -164,3 +164,9 @@ fabric.properties
 # Azure Toolkit for IntelliJ plugin
 # https://plugins.jetbrains.com/plugin/8053-azure-toolkit-for-intellij
 .idea/**/azureSettings.xmlgi
+# Исключаем настройки IDE JetBrains
+.idea/
+
+# Исключаем служебные файлы проекта IDE
+*.iml
+*.iws
