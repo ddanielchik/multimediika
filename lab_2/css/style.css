@@ -1,0 +1,288 @@
+:root {
+  --accent: #b12af6;
+  --glass-bg: rgba(255, 255, 255, 0.12);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --pink-soft: #ffe6ef; /* для списка */
+  --pink-strong: #ffc0dd;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0
+}
+
+html, body {
+  height: 100%;
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  background: #000
+}
+
+.background {
+  position: fixed;
+  inset: 0;
+  background: url("../img/mainpickme.jpg") center/cover no-repeat;
+  /*штучка находится под всеми эл-ами*/
+  z-index: 0;
+}
+
+/* canvas */
+#bg-viz {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/*стеклянная карточка*/
+.app {
+  position: relative;
+  z-index: 10;
+  width: 540px;
+  max-width: 95%;
+  height: 88vh;
+  margin: 4vh auto;
+  background: var(--glass-bg);
+  border-radius: 20px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  backdrop-filter: blur(4px) saturate(1.05);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+/* header */
+header {
+  text-align: center;
+  margin-bottom: 6px
+}
+
+header h1 {
+  font-size: 20px
+}
+
+header p {
+  font-size: 13px;
+  color: #f3f3f3;
+  opacity: 0.95;
+  margin-top: 4px
+}
+
+/* player layout: cover above */
+.player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  flex: 1
+}
+
+/* обложка песни */
+.cover-wrap {
+  width: 260px;
+  height: 260px;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45);
+  position: relative;
+  z-index: 8
+}
+
+.cover-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block
+}
+
+/* track info */
+.track-info {
+  width: 92%;
+  text-align: center
+}
+
+#title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #fff;
+  margin-top: 10px
+}
+
+#artist {
+  font-size: 14px;
+  color: #f0e9f4;
+  margin-bottom: 10px
+}
+
+/* controls centered under artist */
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 7px
+}
+
+.controls button {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 18px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
+}
+
+.controls button:hover {
+  transform: translateY(-3px)
+}
+
+/* progress row */
+.progress-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  margin: 6px 0;
+  color: #fff
+}
+
+.time-group {
+  display: flex;
+  align-items: center;
+  gap: 8px
+}
+
+.time-group.left {
+  justify-content: flex-start
+}
+
+.time-group.right {
+  justify-content: flex-end
+}
+
+#seek {
+  flex: 1;
+  accent-color: var(--accent);
+  cursor: pointer
+}
+
+/* mute and shuffle */
+#muteBtn, #shuffle {
+  border: none;
+  background: transparent;
+  color: #fff;
+  font-size: 17px;
+  cursor: pointer
+}
+
+#muteBtn:hover, #shuffle:hover {
+  transform: scale(1.12);
+  color: var(--accent)
+}
+
+/* track list styling (нежно-розовая карточка с черными названиями) */
+.track-list-wrap {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center
+}
+
+.track-list {
+  list-style: none;
+  width: 100%;
+  max-height: 170px;
+  overflow: auto;
+  padding: 6px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, var(--pink-soft), #fff);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.track-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 8px;
+  margin: 6px 4px;
+  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  transition: transform .12s, box-shadow .12s;
+  background: transparent;
+}
+
+.track-list li:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12)
+}
+
+.track-list .track-title {
+  font-weight: 600;
+  color: #0a0a0a
+}
+
+.track-list .track-artist {
+  font-size: 12px;
+  color: #5a5a5a;
+  margin-left: 10px
+}
+
+.track-list li.active {
+  outline: 2px solid rgba(255, 70, 140, 0.15);
+  background: linear-gradient(90deg, rgba(255, 200, 230, 0.6), rgba(255, 240, 245, 0.4))
+}
+
+/* footer */
+footer {
+  text-align: center;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 6px
+}
+
+/* responsive */
+@media (max-width: 720px) {
+  .cover-wrap {
+    width: 200px;
+    height: 200px
+  }
+
+  .app {
+    height: auto;
+    margin: 18px 10px;
+    padding: 14px
+  }
+  /* Кнопка "Добавить свой трек" в стиле остальных */
+  .upload-label {
+    width: 48px;
+    height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    margin-left: 8px;
+  }
+
+  .upload-label:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+  }
+
+  .upload-label:active {
+    transform: scale(0.95);
+  }
+
+}

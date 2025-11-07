@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>rum</title>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+<div class="background"></div>
+<canvas id="bg-viz"></canvas>
+
+<div class="app">
+  <header>
+    <h1>Верните лето, пожалуйсята</h1>
+    <p>Ну пожалуйста, я хочу солнышко видеть</p>
+  </header>
+
+  <main>
+    <div class="player">
+      <div class="cover-wrap">
+        <img id="cover" src="img/pickme1.jpg" alt="Обложка трека"/>
+      </div>
+
+      <div class="track-info">
+        <div id="title">Calm Down</div>
+        <div id="artist">Rema, Selena Gomez</div>
+
+        <div class="controls">
+          <button id="prev">⏮</button>
+          <button id="play">▶</button>
+          <button id="next">⏭</button>
+        </div>
+
+        <div class="progress-row">
+          <div class="time-group left">
+            <button id="shuffle" title="Перемешать треки">🔀</button>
+            <span id="currentTime">0:00</span>
+          </div>
+
+          <input id="seek" type="range" min="0" max="100" step="0.1" value="0"/>
+
+          <div class="time-group right">
+            <span id="duration">0:00</span>
+            <button id="muteBtn" title="Вкл/Выкл звук">🔊</button>
+          </div>
+        </div>
+
+        <!-- Список треков -->
+        <div class="track-list-wrap">
+          <ul id="trackList" class="track-list" aria-label="Список треков"></ul>
+        </div>
+
+        <!-- Загрузка пользовательского аудио -->
+        <!-- Кнопка "Добавить свой трек" — белый плюс -->
+        <label for="uploadAudio"
+               title="Добавить свой трек"
+               style="display:inline-flex;
+                align-items:center;
+                justify-content:center;
+                width:40px;
+                height:40px;
+                margin-left:8px;
+                 margin-top:12px;
+                background:rgba(182,96,241,0.9);
+                color:#fff;
+                font-size:26px;
+                border-radius:10px;
+                cursor:pointer;
+                user-select:none;">
+          ➕
+          <input id="uploadAudio" type="file" accept="audio/*" hidden />
+        </label>
+      </div>
+
+    </div>
+  </main>
+
+  <audio id="audio" preload="metadata"></audio>
+
+  <footer>
+    <p>ddanielchik's shiza</p>
+  </footer>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
